@@ -1,0 +1,62 @@
+// variables
+$base: #1b5e20;
+$link: #388e3c;
+
+.sidebar {
+    width: 300px;
+    height: 100vh;
+    background-image: linear-gradient(to bottom, $base, darken($base, 15%));
+
+    .top {
+        height: 50px;
+        padding: 10px 15px;
+        background-color: darken($base, 10%);
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .logo {
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+            line-height: 30px;
+        }
+
+        .home {
+            width: 30px;
+            height: 30px;
+            border: 0;
+            background-color: lighten($base, 10%);
+            color: #fff;
+            cursor: pointer;
+            transition: .3s;
+
+            &:hover {
+                background-color: lighten($base, 5%);
+            }
+        }
+
+    } //.top
+
+    .menu {
+        li,
+        a {
+            display: block;
+
+            a {
+                padding: 15px;
+                font-size: 14px;
+                color: #fff;
+                text-decoration: none;
+                background-color: $link;
+                transition: .3s;
+
+                &:hover {
+                    background-color: darken($link, 5%);
+                }
+            }
+        }
+
+    } //.menu
+
+} //.sidebar
