@@ -11,6 +11,12 @@
     #content-app {
         width: calc(100% - 250px);
         float: left;
+
+        .center {
+            height: calc(100% - 50px);
+            padding: 25px;
+            overflow-y: auto;
+        }
     }
 
 } //#application

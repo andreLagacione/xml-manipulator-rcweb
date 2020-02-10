@@ -1,0 +1,30 @@
+// variables
+$base: #1b5e20;
+
+.table {
+    width: 100%;
+    border: 1px dashed $base;
+    border-top: 2px solid $base;
+    border-bottom: 0;
+
+    tr {
+        border-bottom: 1px dashed $base;
+
+        &:nth-child(2n + 1) {
+            background-color: lighten($base, 70%);
+        }
+    }
+
+    th,
+    td {
+        font-size: 14px;
+        color: $base;
+        padding: 10px;
+        text-align: left;
+    }
+
+    th {
+        background-color: lighten($base, 55%);
+    }
+
+} //.table
