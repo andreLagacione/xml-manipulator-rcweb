@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
 
+import datePipe from '../../commons/pipes/date';
+import cpfCnpjPipe from '../../commons/pipes/cpfCnpj';
+
 function ListDocuments() {
 
     const [documents, setDocuments] = useState([]);
@@ -13,9 +16,7 @@ function ListDocuments() {
 
             Promise.all([response1, response2]).then((_response) => {
                 _response.forEach(item => {
-                    item.data.map(subItem => {
-                        documentList.push(subItem);
-                    });
+                    item.data.map(subItem => documentList.push(subItem));
                 });
 
                 console.log(documentList);
@@ -46,14 +47,14 @@ function ListDocuments() {
                 {
                     documents.map(item => (
                         <tr key={item.id}>
-                            <td>{item.cnpjEmissor}</td>
+                            <td>{cpfCnpjPipe(item.cnpjEmissor)}</td>
                             <td>{item.cidadeEstadoEmissor}</td>
-                            <td>{item.cnpjRemetente}</td>
+                            <td>{cpfCnpjPipe(item.cnpjRemetente)}</td>
                             <td>{item.cidadeEstadoRemetente}</td>
-                            <td>{item.cnpjDestinatario}</td>
+                            <td>{cpfCnpjPipe(item.cnpjDestinatario)}</td>
                             <td>{item.cidadeEstadoDestinatario}</td>
                             <td>{item.chaveAcesso}</td>
-                            <td>{item.dataEmissao}</td>
+                            <td>{datePipe(item.dataEmissao)}</td>
                         </tr>
                     ))
                 }
