@@ -3,6 +3,7 @@ import api from '../../services/api';
 
 import datePipe from '../../commons/pipes/date';
 import cpfCnpjPipe from '../../commons/pipes/cpfCnpj';
+import randomKey from '../../commons/random-key/random-key';
 
 function ListDocuments() {
 
@@ -19,7 +20,6 @@ function ListDocuments() {
                     item.data.map(subItem => documentList.push(subItem));
                 });
 
-                console.log(documentList);
                 setDocuments(documentList);
             });
         }
@@ -46,7 +46,7 @@ function ListDocuments() {
             <tbody>
                 {
                     documents.map(item => (
-                        <tr key={item.id}>
+                        <tr key={randomKey(item.id)}>
                             <td>{cpfCnpjPipe(item.cnpjEmissor)}</td>
                             <td>{item.cidadeEstadoEmissor}</td>
                             <td>{cpfCnpjPipe(item.cnpjRemetente)}</td>
