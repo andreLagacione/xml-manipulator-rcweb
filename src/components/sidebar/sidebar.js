@@ -11,9 +11,11 @@ function Sidebar() {
         <div className="sidebar">
             <header className="top">
                 <h1 className="logo">XML Manipulator</h1>
-                <button className="home">
-                    <FontAwesomeIcon icon={ faHome } />
-                </button>
+                <Link to="/list-documents">
+                    <button className="home">
+                        <FontAwesomeIcon icon={faHome} />
+                    </button>
+                </Link>
             </header>
 
             <nav className="menu">
