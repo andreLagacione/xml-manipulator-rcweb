@@ -1,13 +1,12 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from 'react-router-dom';
 
 import './sidebar.scss';
 
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 
 function Sidebar() {
-
-
     return (
         <div className="sidebar">
             <header className="top">
@@ -19,7 +18,8 @@ function Sidebar() {
 
             <nav className="menu">
                 <ul>
-                    <li><a href="#" title="">Item</a></li>
+                    <li><Link to="/list-documents" title="Documentos salvos">Documentos</Link></li>
+                    <li><Link to="/upload-document" title="Upload de documentos">Upload</Link></li>
                 </ul>
             </nav>
         </div>
