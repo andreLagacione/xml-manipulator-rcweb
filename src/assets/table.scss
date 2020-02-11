@@ -1,5 +1,5 @@
 // variables
-$base: #1b5e20;
+$base: #01579b;
 
 .table {
     width: 100%;
@@ -11,7 +11,7 @@ $base: #1b5e20;
         border-bottom: 1px dashed $base;
 
         &:nth-child(2n + 1) {
-            background-color: lighten($base, 70%);
+            background-color: lighten($base, 65%);
         }
     }
 
