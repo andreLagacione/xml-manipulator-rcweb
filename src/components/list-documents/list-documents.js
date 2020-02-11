@@ -40,6 +40,7 @@ function ListDocuments() {
                     <th>Cidade Destinatario</th>
                     <th>Chave de acesso</th>
                     <th>Data de emissão</th>
+                    <th></th>
                 </tr>
             </thead>
 
@@ -55,6 +56,7 @@ function ListDocuments() {
                             <td>{item.cidadeEstadoDestinatario}</td>
                             <td>{item.chaveAcesso}</td>
                             <td>{datePipe(item.dataEmissao)}</td>
+                            <td>Remove/Editar</td>
                         </tr>
                     ))
                 }
