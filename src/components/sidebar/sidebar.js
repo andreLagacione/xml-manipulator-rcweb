@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import './sidebar.scss';
 
-import { faHome } from "@fortawesome/free-solid-svg-icons";
+import { faHome } from '@fortawesome/free-solid-svg-icons';
 
 function Sidebar() {
     return (
