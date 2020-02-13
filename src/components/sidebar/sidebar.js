@@ -6,7 +6,6 @@ import { faHome, faFile, faUpload } from '@fortawesome/free-solid-svg-icons';
 
 import './sidebar.scss';
 
-
 function Sidebar() {
     return (
         <div className="sidebar">
