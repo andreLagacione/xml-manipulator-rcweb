@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import axios from 'axios';
 
 import { faPencilAlt, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-
-import api from '../../services/api';
 
 import datePipe from '../../commons/pipes/date';
 import cpfCnpjPipe from '../../commons/pipes/cpfCnpj';
@@ -15,8 +14,8 @@ function ListDocuments() {
 
     useEffect(() => {
         async function loadDocuments() {
-            const response1 = await api.get('/document');
-            const response2 = await api.get('/edited-document');
+            const response1 = await axios.get('/document');
+            const response2 = await axios.get('/edited-document');
             let documentList = [];
 
             Promise.all([response1, response2]).then((_response) => {
