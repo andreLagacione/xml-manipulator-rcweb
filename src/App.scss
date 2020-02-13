@@ -4,13 +4,15 @@
     overflow: hidden;
     
     #sidebar {
-        width: 250px;
+        width: 50px;
         float: left;
         height: 100vh;
+        position: relative;
+        z-index: 10;
     }
 
     #content-app {
-        width: calc(100% - 250px);
+        width: calc(100% - 50px);
         float: left;
         height: 100vh;
 

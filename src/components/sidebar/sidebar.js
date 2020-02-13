@@ -1,16 +1,16 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHome, faFile, faUpload } from '@fortawesome/free-solid-svg-icons';
 
 import './sidebar.scss';
 
-import { faHome } from '@fortawesome/free-solid-svg-icons';
 
 function Sidebar() {
     return (
         <div className="sidebar">
             <header className="top">
-                <h1 className="logo">XML Manipulator</h1>
                 <Link to="/list-documents">
                     <button className="home">
                         <FontAwesomeIcon icon={faHome} />
@@ -20,8 +20,18 @@ function Sidebar() {
 
             <nav className="menu">
                 <ul>
-                    <li><Link to="/list-documents" title="Documentos salvos">Documentos</Link></li>
-                    <li><Link to="/upload-document" title="Upload de documentos">Upload</Link></li>
+                    <li>
+                        <Link to="/list-documents" title="Documentos salvos">
+                            <FontAwesomeIcon className="icon" icon={faFile} />
+                            <span className="text">Documentos</span>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/upload-document" title="Upload de documentos">
+                            <FontAwesomeIcon className="icon" icon={faUpload} />
+                            <span className="text">Upload</span>
+                        </Link>
+                    </li>
                 </ul>
             </nav>
         </div>
