@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { faUpload } from '@fortawesome/free-solid-svg-icons';
 
-import api from '../../services/api';
-
 import './upload-document.scss';
+import { sendFileRequest } from './upload-document-service'
 
 function UploadDocument() {
 
     const [fileName, setFileName] = useState([]);
     const [file, setFile] = useState([]);
+    let fileInputRef = React.createRef();
 
-    function fileAdded() {
-        let fileInput = document.getElementById('fileInput');   
-        let _filename = fileInput.files[0].name;
+    function fileAdded(event) {
+        let fileInput = event.target.files[0];
+        let _filename = fileInput.name;
         setFile(fileInput);
         setFileName(_filename);
     }
@@ -22,23 +22,21 @@ function UploadDocument() {
     async function sendFile(event) {
         event.preventDefault();
 
-        if (!file) {
+        if (file instanceof Array && !file.length) {
             alert('Selecione um arquivo');
             return false;
         }
-        
-        const data = new FormData();
-        data.append('file', file);
 
-        const xmlSalved = await api.post('/document', data);
-        console.log(xmlSalved);
+        sendFileRequest('/document', file);
     }
 
 
     return (
         <>
             <form onSubmit={sendFile} id="document-upload">
-                <input type="file" name="fileInput" id="fileInput" accept=".xml" hidden onChange={fileAdded} />
+                <input type="file" name="fileInput" id="fileInput" accept=".xml" ref={fileInputRef} hidden onChange={fileAdded} />
+
+
                 <label htmlFor="fileInput" className="file-name">
                     {fileName}
                     <span className="btn-select">Selecione</span>
