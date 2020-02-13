@@ -1,17 +1,46 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { faUpload } from '@fortawesome/free-solid-svg-icons';
 
+import api from '../../services/api';
+
 import './upload-document.scss';
 
 function UploadDocument() {
+
+    const [fileName, setFileName] = useState([]);
+    const [file, setFile] = useState([]);
+
+    function fileAdded() {
+        let fileInput = document.getElementById('fileInput');   
+        let _filename = fileInput.files[0].name;
+        setFile(fileInput);
+        setFileName(_filename);
+    }
+
+    async function sendFile(event) {
+        event.preventDefault();
+
+        if (!file) {
+            alert('Selecione um arquivo');
+            return false;
+        }
+        
+        const data = new FormData();
+        data.append('file', file);
+
+        const xmlSalved = await api.post('/document', data);
+        console.log(xmlSalved);
+    }
+
+
     return (
         <>
-            <form onSubmit="" id="document-upload">
-                <input type="file" name="fileInput" id="fileInput" accept=".xml" hidden />
+            <form onSubmit={sendFile} id="document-upload">
+                <input type="file" name="fileInput" id="fileInput" accept=".xml" hidden onChange={fileAdded} />
                 <label htmlFor="fileInput" className="file-name">
-                    xtpo.xml
+                    {fileName}
                     <span className="btn-select">Selecione</span>
                 </label>
 
