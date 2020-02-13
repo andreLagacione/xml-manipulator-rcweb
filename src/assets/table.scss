@@ -1,5 +1,6 @@
 // variables
 $base: #01579b;
+$remove: #c62828;
 
 .table {
     width: 100%;
@@ -26,5 +27,37 @@ $base: #01579b;
     th {
         background-color: lighten($base, 55%);
     }
+
+    .col-actions {
+        width: 77px;
+    }
+
+    .btn-table {
+        width: 25px;
+        height: 25px;
+        border: 0;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+        float: left;
+
+        &.edit {
+            background-color: $base;
+
+            &:hover {
+                background-color: darken($base, 10%);
+            }
+        }
+
+        &.remove {
+            background-color: $remove;
+            margin-left: 5px;
+
+            &:hover {
+                background-color: darken($remove, 10%);
+            }
+        }
+
+    } //.btn-table
 
 } //.table

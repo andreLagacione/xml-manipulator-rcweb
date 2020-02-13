@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import { faPencilAlt, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+
 import api from '../../services/api';
 
 import datePipe from '../../commons/pipes/date';
@@ -40,7 +44,7 @@ function ListDocuments() {
                     <th>Cidade Destinatario</th>
                     <th>Chave de acesso</th>
                     <th>Data de emissão</th>
-                    <th></th>
+                    <th className="col-actions"></th>
                 </tr>
             </thead>
 
@@ -56,7 +60,14 @@ function ListDocuments() {
                             <td>{item.cidadeEstadoDestinatario}</td>
                             <td>{item.chaveAcesso}</td>
                             <td>{datePipe(item.dataEmissao)}</td>
-                            <td>Remove/Editar</td>
+                            <td className="col-actions">
+                                <button type="button" className="btn-table edit">
+                                    <FontAwesomeIcon icon={faPencilAlt} />
+                                </button>
+                                <button type="button" className="btn-table remove">
+                                    <FontAwesomeIcon icon={faTrashAlt} />
+                                </button>
+                            </td>
                         </tr>
                     ))
                 }
