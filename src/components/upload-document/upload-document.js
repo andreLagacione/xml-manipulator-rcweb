@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { faUpload } from '@fortawesome/free-solid-svg-icons';
 
 import './upload-document.scss';
 import { sendFileRequest } from './upload-document-service'
+import ShowXml from './show-xml/show-xml';
 
 function UploadDocument() {
 
     const [fileName, setFileName] = useState([]);
     const [file, setFile] = useState([]);
+    const [xmlEnviado, setXmlEnviado] = useState([]);
+    const [showUploadResponse, setShowUploadResponse] = useState([]);
+
     let fileInputRef = React.createRef();
 
     function fileAdded(event) {
@@ -27,9 +31,17 @@ function UploadDocument() {
             return false;
         }
 
-        sendFileRequest('/document', file);
+        const _response = await sendFileRequest('/document', file);
+
+        if (_response.status === 200) {
+            setXmlEnviado(_response.data.content);
+            setShowUploadResponse(true);
+        }
     }
 
+    useEffect(() => {
+        setShowUploadResponse(false);
+    }, []);
 
     return (
         <>
@@ -50,10 +62,8 @@ function UploadDocument() {
                 </div>
             </form>
 
-            <div className="xml-document">
-                <h3 className="title">Documento enviado</h3>
-
-                <div className="content"></div>
+            <div className={!showUploadResponse ? 'hidden': ''}>
+                <ShowXml xml={xmlEnviado} />
             </div>
         </>
     );
