@@ -1,0 +1,22 @@
+// variables
+$base: #01579b;
+
+.xml-document {
+    border: 2px solid $base;
+    margin-top: 25px;
+
+    .title {
+        background-color: $base;
+        font-size: 14px;
+        font-weight: bold;
+        color: #fff;
+        padding: 10px 15px;
+        display: block;
+    }
+
+    .content {
+        padding: 15px;
+        overflow-x: auto;
+    }
+
+} //.xml-document
