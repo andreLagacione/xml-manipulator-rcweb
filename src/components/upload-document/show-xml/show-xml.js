@@ -8,7 +8,6 @@ function ShowXml({ xml }) {
 
     useEffect(() => {
         if (!xml instanceof Array) {
-            console.log('vaca')
             setXmlEnviado(beautify(xml));
         }
     }, []);
