@@ -57,9 +57,6 @@ function ListDocuments() {
     }
 
     function handleConfirmAction() {
-
-        console.log(idDocumentToRemove, documentIsEdited)
-
         if (documentIsEdited) {
             deleteEditedDocument();
             return false;
