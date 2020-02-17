@@ -4,8 +4,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpload } from '@fortawesome/free-solid-svg-icons';
 
 import './upload-document.scss';
-import { sendFileRequest } from './upload-document-service'
+import { sendFileRequest } from './service/upload-document-service'
 import ShowXml from './show-xml/show-xml';
+import AlertModel from '../../commons/alert-modal/alert-modal';
 
 function UploadDocument() {
 
@@ -13,6 +14,7 @@ function UploadDocument() {
     const [file, setFile] = useState([]);
     const [xmlEnviado, setXmlEnviado] = useState([]);
     const [showUploadResponse, setShowUploadResponse] = useState([]);
+    const [configModal, setConfigModal] = useState([]);
 
     let fileInputRef = React.createRef();
 
@@ -27,7 +29,11 @@ function UploadDocument() {
         event.preventDefault();
 
         if (file instanceof Array && !file.length) {
-            alert('Selecione um arquivo');
+            setConfigModal({
+                show: true,
+                title: 'Enviar documento',
+                message: 'Você precisa selecionar um arquivo para enviar!'
+            });
             return false;
         }
 
@@ -41,7 +47,17 @@ function UploadDocument() {
 
     useEffect(() => {
         setShowUploadResponse(false);
+
+        setConfigModal({
+            show: false
+        });
     }, []);
+
+    function handleOnCloseModal() {
+        setConfigModal({
+            show: false
+        });
+    }
 
     return (
         <>
@@ -62,9 +78,11 @@ function UploadDocument() {
                 </div>
             </form>
 
-            <div className={!showUploadResponse ? 'hidden': ''}>
+            <div className={!showUploadResponse ? 'hidden' : ''}>
                 <ShowXml xml={xmlEnviado} />
             </div>
+
+            <AlertModel configModal={configModal} closeModal={handleOnCloseModal} confirmAction={handleOnCloseModal} />
         </>
     );
 }
