@@ -30,7 +30,7 @@ function App() {
               <Route exact path="/list-documents" component={ListDocuments} />
               <Redirect exact from="/" to="/list-documents" />
               <Route exact path="/upload-document" component={UploadDocument} />
-              <Route exact path="/edit-document/:id" component={EditDocument} />
+              <Route exact path="/edit-document/:id/:isEdited" component={EditDocument} />
             </Switch>
           </div>
         </main>
