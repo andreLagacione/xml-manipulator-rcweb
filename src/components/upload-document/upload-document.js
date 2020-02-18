@@ -5,7 +5,7 @@ import { faUpload } from '@fortawesome/free-solid-svg-icons';
 
 import './upload-document.scss';
 import { sendFileRequest } from './service/upload-document-service'
-import ShowXml from './show-xml/show-xml';
+import ShowXml from '../show-xml/show-xml';
 import AlertModel from '../../commons/alert-modal/alert-modal';
 
 function UploadDocument() {
