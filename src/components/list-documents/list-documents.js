@@ -84,7 +84,6 @@ function ListDocuments() {
         }
     }
 
-
     return (
         <>
             <table className="table">
