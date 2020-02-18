@@ -7,10 +7,10 @@ function ShowXml({ xml }) {
     const [xmlEnviado, setXmlEnviado] = useState([]);
 
     useEffect(() => {
-        if (!xml instanceof Array) {
+        if (xml && xml.length) {
             setXmlEnviado(beautify(xml));
         }
-    }, []);
+    }, [xml]);
 
     return (
         <>
