@@ -1,5 +1,6 @@
 // variables
 $base: #01579b;
+$alertText: #b71c1c;
 
 #edit-document {
     border: 1px solid $base;
@@ -63,5 +64,12 @@ $base: #01579b;
         } //.box-input
 
     } //form
+
+    .alert {
+        display: block;
+        margin: 0 0 15px 15px;
+        font-size: 12px;
+        color: $alertText;
+    }
 
 } //#edit-document

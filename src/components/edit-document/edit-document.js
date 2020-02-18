@@ -16,7 +16,7 @@ function EditDOcument() {
             <form>
                 <div className="box-input">
                     <label htmlFor="tagName">Nome da tag</label>
-                    <input type="text" id="tagName" name="tagName" />
+                    <input type="text" id="tagName" name="tagName" placeholder="ex: pontoReferencia" />
                 </div>
 
                 <div className="box-input">
@@ -28,6 +28,8 @@ function EditDOcument() {
                     <button type="button" className="send">Salvar</button>
                 </div>
             </form>
+
+            <small className="alert">* o nome da tag não pode conter caractéres especias e/ou espaço em branco.</small>
         </div>
     );
 }
