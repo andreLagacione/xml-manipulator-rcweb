@@ -4,14 +4,16 @@ import axios from 'axios';
 
 import { faPencilAlt, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
+import './edit-document.scss';
+
 function EditDOcument() {
 
 
     return (
-        <>
+        <div id="edit-document">
             <h3 className="title">Adicionar/Editar tag</h3>
 
-            <form id="edit-document">
+            <form>
                 <div className="box-input">
                     <label htmlFor="tagName">Nome da tag</label>
                     <input type="text" id="tagName" name="tagName" />
@@ -26,7 +28,7 @@ function EditDOcument() {
                     <button type="button" className="send">Salvar</button>
                 </div>
             </form>
-        </>
+        </div>
     );
 }
 
