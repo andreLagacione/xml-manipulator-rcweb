@@ -59,6 +59,14 @@ $alertText: #b71c1c;
                 &:hover {
                     background-color: darken($base, 10%);
                 }
+
+                &:disabled {
+                    cursor: not-allowed;
+    
+                    &:hover {
+                        background-color: $base;
+                    }
+                }
             }
 
         } //.box-input
