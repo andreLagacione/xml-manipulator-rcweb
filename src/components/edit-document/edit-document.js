@@ -51,7 +51,7 @@ class EditDocument extends Component {
         const tagNameValue = this.tagName.value;
         const tagValueValue = this.tagValue.value;
 
-        console.log(tagNameValue.length && tagValueValue.length)
+        console.log(tagNameValue.length, tagValueValue.length);
 
         if (tagNameValue.length && tagValueValue.length) {
             this.state.configModal.show = true;
