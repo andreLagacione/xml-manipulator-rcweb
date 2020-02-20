@@ -1,115 +1,124 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, useParams } from 'react-router-dom';
+import React, { Component } from 'react';
 import axios from 'axios';
 
 import './edit-document.scss';
+import AlertModel from '../../commons/alert-modal/alert-modal';
 
-function EditDOcument() {
+class EditDocument extends Component {
 
-    const [sendDisabled, setDendDisabled] = useState(true);
-    const [oldTagName, setOldTagName] = useState(null);
-    const { id, isEdited } = useParams();
+    constructor(props) {
+        super(props);
 
-    let tagNameXPTO;
-    let tagValue;
+        this.state = {
+            tag: {
+                name: '',
+                value: ''
+            },
+            oldTagName: '',
+            configModal: {
+                show: false,
+                title: 'Salvar alteração',
+                message: 'Você precisa o nome e o valor da tag!'
+            }
+        };
 
-    useEffect(() => {
-        console.log(tagNameXPTO, '1')
+        this.buildName = this.buildName.bind(this);
+        this.getDocumentTag = this.getDocumentTag.bind(this);
+        this.sendEdtitedDocument = this.sendEdtitedDocument.bind(this);
+        this.getRouteParams = this.getRouteParams.bind(this);
+        this.handleOnCloseModal = this.handleOnCloseModal.bind(this);
 
-        // if (document.readyState === 'complete' && isEdited) {
-            verifyInputTagNameIsLoaded();
-        // }
-    }, []);
-
-    // document.onreadystatechange = () => {
-    //     if (document.readyState === 'complete' && isEdited) {
-    //         getDocumentTag();
-    //     }
-    // };
-
-    const checkValues = () => {
-        const tagNameValue = tagNameXPTO.current.value;
-        const tagValueValue = tagValue.current.value;
-
-        if (tagNameValue.length && tagValueValue.length) {
-            setDendDisabled(false);
-        }
+        this.getDocumentTag();
     }
 
-    const buildName = () => {
-        const tagNameValue = tagNameXPTO.current.value;
-        tagNameXPTO.current.value = tagNameValue.replace(/[`~!@#$%^&*()_|+\-=?;:¨'",.<>\{\}\[\]\\\/\s]/gi, '');
+    buildName = () => {
+        const tagNameValue = this.tagName.value;
+        this.tagName.value = tagNameValue.replace(/[`~!@#$%^&*()_|+\-=?;:¨'",.<>{}[\]\\/\s]/gi, '');
+
+
     }
 
-    const getDocumentTag = async () => {
-        const _response = await axios.get(`/edited-document/${id}`);
-        setOldTagName(_response.data.customTagName);
-        console.log(tagNameXPTO, '2')
-        tagNameXPTO = oldTagName;
-
-        // verifyInputTagNameIsLoaded();
+    getDocumentTag = async () => {
+        const _response = await axios.get(`/edited-document/${this.getRouteParams().id}`);
+        const tagName = _response.data.customTagName;
+        this.state.oldTagName = tagName;
+        this.tagName.value = tagName;
     }
 
-    const verifyInputTagNameIsLoaded = () => {
-        // console.log(document.readyState)
-        // if (document.readyState !== 'complete') {
-            setInterval(() => {
-                getDocumentTag();
-            }, 3000);
-
-            return;
-        // }
-
-        getDocumentTag();
-    }
-
-    const sendEdtitedDocument = async (e) => {
+    sendEdtitedDocument = async (e) => {
         e.preventDefault();
 
+        const tagNameValue = this.tagName.value;
+        const tagValueValue = this.tagValue.value;
+
+        console.log(tagNameValue.length && tagValueValue.length)
+
+        if (tagNameValue.length && tagValueValue.length) {
+            this.state.configModal.show = true;
+            return false;
+        }
+
         const request = {
-            documentId: id,
-            oldTagName: oldTagName,
-            newTagName: tagNameXPTO.current.value,
-            tagValue: tagValue.current.value,
-            isEdited: isEdited,
+            documentId: this.getRouteParams().id,
+            oldTagName: this.state.oldTagName,
+            newTagName: this.tagName.value,
+            tagValue: this.tagValue.value,
+            isEdited: this.getRouteParams().isEdited,
         }
 
         const _response = await axios.post('/edited-document/edit', request);
         console.log(_response);
     }
 
+    getRouteParams = () => {
+        const { match: { params } } = this.props;
+        return params;
+    }
 
-    return (
-        <div id="edit-document">
-            <h3 className="title">Adicionar/Editar tag</h3>
+    handleOnCloseModal = () => {
+        this.state.configModal.show = false;
+    }
 
-            <form onSubmit={sendEdtitedDocument}>
-                <div className="box-input">
-                    <label htmlFor="tagName">Nome da tag</label>
-                    <input
-                        type="text"
-                        id="tagName"
-                        name="tagName"
-                        placeholder="ex: pontoReferencia"
-                        value={tagNameXPTO}
-                        onChange={checkValues}
-                        onBlur={buildName}
-                    />
-                </div>
 
-                <div className="box-input">
-                    <label htmlFor="tagValue">Valor da tag</label>
-                    <input type="text" id="tagValue" name="tagValue" value={tagValue} onChange={checkValues} />
-                </div>
+    render() {
+        return (
+            <div id="edit-document">
+                <h3 className="title">Adicionar/Editar tag</h3>
 
-                <div className="box-input">
-                    <button type="submit" className="send" disabled={sendDisabled}>Salvar</button>
-                </div>
-            </form>
+                <form onSubmit={this.sendEdtitedDocument}>
+                    <div className="box-input">
+                        <label htmlFor="tagName">Nome da tag</label>
+                        <input
+                            type="text"
+                            id="tagNameRef"
+                            name="tagName"
+                            placeholder="ex: pontoReferencia"
+                            ref={(tagName) => this.tagName = tagName}
+                            onBlur={this.buildName}
+                        />
+                    </div>
 
-            <small className="alert">* o nome da tag não pode conter caractéres especias e/ou espaço em branco.</small>
-        </div>
-    );
+                    <div className="box-input">
+                        <label htmlFor="tagValue">Valor da tag</label>
+                        <input
+                            type="text"
+                            id="tagValueRef"
+                            name="tagValue"
+                            ref={(tagValue) => this.tagValue = tagValue}
+                            onBlur={this.buildName} />
+                    </div>
+
+                    <div className="box-input">
+                        <button type="submit" className="send">Salvar</button>
+                    </div>
+                </form>
+
+                <small className="alert">* o nome da tag não pode conter caractéres especias e/ou espaço em branco.</small>
+
+                <AlertModel configModal={this.state.configModal} closeModal={this.handleOnCloseModal} confirmAction={this.handleOnCloseModal} />
+            </div>
+        );
+    }
 }
 
-export default EditDOcument;
+export default EditDocument;
