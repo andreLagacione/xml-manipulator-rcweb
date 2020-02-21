@@ -34,8 +34,6 @@ class EditDocument extends Component {
     buildName = () => {
         const tagNameValue = this.tagName.value;
         this.tagName.value = tagNameValue.replace(/[`~!@#$%^&*()_|+\-=?;:¨'",.<>{}[\]\\/\s]/gi, '');
-
-
     }
 
     getDocumentTag = async () => {
