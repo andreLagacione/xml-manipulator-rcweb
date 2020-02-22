@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpload } from '@fortawesome/free-solid-svg-icons';
 
 import './upload-document.scss';
-import { sendFileRequest } from './service/upload-document-service'
+import { sendFileRequest } from './service/upload-document-service';
 import ShowXml from '../show-xml/show-xml';
 import AlertModel from '../../commons/alert-modal/alert-modal';
 
