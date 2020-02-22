@@ -8,6 +8,7 @@ import {
 import './edit-document.scss';
 import AlertModel from '../../commons/alert-modal/alert-modal';
 import ShowXml from '../show-xml/show-xml';
+import removeSpecialChars from '../../commons/formatter/remove-special-chars';
 
 function EditDocument() {
 
@@ -29,10 +30,8 @@ function EditDocument() {
         getDocumentTag();
     }, [document]);
 
-
     const buildName = () => {
-        const _tagName = tagNameValue.value;
-        tagNameValue.value = _tagName.replace(/[`~!@#$%^&*()_|+\-=?;:¨'",.<>{}[\]\\/\s]/gi, '');
+        tagNameValue.value = removeSpecialChars(tagNameValue.value);
     }
 
     const getDocumentTag = async () => {
