@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useHistory } from "react-router-dom";
 import axios from 'axios';
 
 import { faPencilAlt, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
@@ -15,6 +16,7 @@ function ListDocuments() {
     const [configModal, setConfigModal] = useState([]);
     const [idDocumentToRemove, setIdDocumentToRemove] = useState([]);
     const [documentIsEdited, setDocumentIsEdited] = useState([]);
+    let history = useHistory();
 
     useEffect(() => {
         setConfigModal({
@@ -84,6 +86,10 @@ function ListDocuments() {
         }
     }
 
+    function redirect(id, isEdited) {
+        history.push(`edit-document/${id}/${isEdited}`);
+    }
+
     return (
         <>
             <table className="table">
@@ -114,7 +120,7 @@ function ListDocuments() {
                                 <td>{item.chaveAcesso}</td>
                                 <td>{datePipe(item.dataEmissao)}</td>
                                 <td className="col-actions">
-                                    <button type="button" className="btn-table edit">
+                                    <button type="button" className="btn-table edit" onClick={() => redirect(item.id, item.edited)}>
                                         <FontAwesomeIcon icon={faPencilAlt} />
                                     </button>
                                     <button type="button" className="btn-table remove" onClick={() => removeDocument(item.id, item.edited)}>
