@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import beautify from 'xml-beautifier';
+import HTMLTree from 'react-htmltree'
+
 import './show-xml.scss';
 
 function ShowXml({ xml }) {
@@ -8,7 +10,7 @@ function ShowXml({ xml }) {
 
     useEffect(() => {
         if (xml && xml.length) {
-            setXmlEnviado(beautify(xml));
+            setXmlEnviado(xml);
         }
     }, [xml]);
 
@@ -17,7 +19,9 @@ function ShowXml({ xml }) {
             <div className="xml-document">
                 <h3 className="title">Documento enviado</h3>
 
-                <div className="content">{xmlEnviado}</div>
+                <div className="content">
+                    <HTMLTree source={xmlEnviado} />
+                </div>
             </div>
         </>
     )
